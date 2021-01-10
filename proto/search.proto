@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package search;
+
+import "gogoproto/gogo.proto";
+
+import "github.com/pingcap/tipb/go-tipb/analyze.pb.go";
+
+option java_multiple_files = true;
+option java_package = "com.pingcap.tidb.tisearch";
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+message SearchField {
+
+  string field = 1;
+
+  string word = 2;
+
+}
+
+
+message SearchQuery {
+
+  string indexName = 1;
+
+  int32  mode = 2;
+
+  uint64 limit = 3;
+
+  SearchField searchFields = 4;
+
+  string store_fields = 5;
+
+}
+
+
+message Parser {
+
+  int32 ParserType = 1;
+
+  uint32 maxTokenSize = 2;
+
+  uint32 minTokenSize = 3;
+
+  repeated string stopWords = 4;
+
+}
+
+
+message FullTextIndex{
+
+  string indexName = 1;
+
+  Parser parser = 2;
+
+
+}
